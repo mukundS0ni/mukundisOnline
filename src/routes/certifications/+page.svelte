@@ -1,153 +1,287 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
 
-<body class="bg-gray-100">
-    <div class="flex">
-        <!-- Sidebar -->
-        <aside id="default-sidebar" class="w-128 h-screen bg-blue-200 p-4">
-            <h2 class="text-xl font-bold mb-4 p-2">Licenses & Certifications</h2>
-            <ul class="space-y-2">
-                <li>
-                    <a href="#python" class="block p-2 hover:bg-gray-200 rounded" data-cert="python">
-                        Python for Everybody Specialization
-                    </a>
-                </li>
-                <li>
-                    <a href="#dialogflow" class="block p-2 hover:bg-gray-200 rounded" data-cert="dialogflow">
-                        Building Conversational Experiences with Dialogflow
-                    </a>
-                </li>
-                <li>
-                    <a href="#iiot" class="block p-2 hover:bg-gray-200 rounded" data-cert="iiot">
-                        Industrial IoT on Google Cloud Platform
-                    </a>
-                </li>
-                <li>
-                    <a href="#mandarin" class="block p-2 hover:bg-gray-200 rounded" data-cert="mandarin">
-                        Learn Mandarin Chinese Specialization
-                    </a>
-                </li>
-                <li>
-                    <a href="#datascience" class="block p-2 hover:bg-gray-200 rounded" data-cert="datascience">
-                        Fundamentals of Scalable Data Science
-                    </a>
-                </li>
-                <li>
-                    <a href="#programming" class="block p-2 hover:bg-gray-200 rounded" data-cert="programming">
-                        Programming Fundamentals
-                    </a>
-                </li>
-                <li>
-                    <a href="#spanish" class="block p-2 hover:bg-gray-200 rounded" data-cert="spanish">
-                        Spanish Vocabulary: Meeting People
-                    </a>
-                </li>
-            </ul>
-        </aside>
+	interface Certification {
+		name: string;
+		icon: string;
+		image: string;
+		organization: string;
+		date: string;
+		categories: string[];
+	}
 
-        <!-- Main Content Area -->
-        <main class="flex-1 p-8" id="certification-details">
-            <div id="python" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Python for Everybody Specialization</h1>
-                <p class="mb-2"><strong>Issued by:</strong> University of Michigan</p>
-                <p class="mb-2"><strong>Date:</strong> Oct 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> 6GKABKTH4ZCJ</p>
-                <p class="mb-2"><strong>Skills:</strong> Python (Programming Language) · Pandas</p>
-                <a href="https://www.coursera.org/account/accomplishments/verify/6GKABKTH4ZCJ" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+	const certifications: Certification[] = [
+		{
+			name: 'Programming for Everybody (Specialization)',
+			icon: '/svg/python.svg',
+			image: '/certificate/python/Python.png',
+			organization: 'University of Michigan',
+			date: 'Completed October 2020',
+			categories: [
+				'Programming for Everybody (Getting Started with Python)',
+				'Python Data Structures',
+				'Using Python to Access Web Data',
+				'Using Databases with Python',
+				'Capstone: Retrieving, Processing, and Visualizing Data with Python'
+			]
+		},
+		{
+			name: 'Programming for Everybody (Getting Started with Python)',
+			icon: '/svg/python.svg',
+			image: '/certificate/python/1.jpg',
+			organization: 'University of Michigan',
+			date: 'Completed June 2020',
+			categories: ['Computer Programming', 'Python Programming', 'Algorithms', 'Problem Solving']
+		},
+		{
+			name: 'Using Databases with Python',
+			icon: '/svg/python.svg',
+			image: '/certificate/python/2.jpg',
+			organization: 'University of Michigan',
+			date: 'Completed July 2020',
+			categories: [
+				'Computer Programming',
+				'Python Programming',
+				'Web Development',
+				'HTML and CSS',
+				'Data Analysis Software'
+			]
+		},
+		{
+			name: 'Using Python to Access Web Data',
+			icon: '/svg/python.svg',
+			image: '/certificate/python/3.jpg',
+			organization: 'University of Michigan',
+			date: 'Completed August 2020',
+			categories: [
+				'Computer Programming',
+				'Python Programming',
+				'Web Development',
+				'HTML and CSS',
+				'Data Analysis Software'
+			]
+		},
+		{
+			name: 'Using Databases with Python',
+			icon: '/svg/python.svg',
+			image: '/certificate/python/4.jpg',
+			organization: 'University of Michigan',
+			date: 'Completed October 2020',
+			categories: [
+				'Computer Programming',
+				'Data Structures',
+				'Python Programming',
+				'Database Theory',
+				'Database Administration'
+			]
+		},
+		{
+			name: 'Capstone: Retrieving, Processing, and Visualizing Data',
+			icon: '/svg/python.svg',
+			image: '/certificate/python/5.jpg',
+			organization: 'University of Michigan',
+			date: 'Completed August 2020',
+			categories: ['Computer Programming', 'Python Programming', 'Data Visualization', 'Databases']
+		},
+		{
+			name: 'Programming Fundamentals',
+			icon: '/svg/duke.png',
+			image: '/certificate/Duke.jpg',
+			organization: 'University of Michigan',
+			date: 'Completed August 2020',
+			categories: ['Computer Programming', 'Python Programming', 'Algorithms', 'Problem Solving']
+		},
+		{
+			name: 'Build Your First Android App',
+			icon: '/svg/android.svg',
+			image: '/certificate/android.jpg',
+			organization: 'CentraleSupélec',
+			date: 'Completed November 2020',
+			categories: ['Application Development', 'Software Engineering', 'Android Development']
+		},
+		{
+			name: 'Industrial IoT on Google Cloud',
+			icon: '/svg/google.svg',
+			image: '/certificate/IOT.jpg',
+			organization: 'Google Cloud',
+			date: 'Completed July 2020',
+			categories: ['Google Cloud Platform', 'Cloud Computing', 'Internet Of Things']
+		},
+		{
+			name: 'Building Conversational Experiences with Dialogflow',
+			icon: '/svg/google.svg',
+			image: '/certificate/Dialogflow.jpg',
+			organization: 'Google Cloud',
+			date: 'Completed July 2020',
+			categories: ['Natural Language Processing', 'Machine Learning', 'Cloud Applications']
+		},
+		{
+			name: 'Learn Mandarin Chinese (Specialization)',
+			icon: '/svg/chUni.png',
+			image: '/certificate/chinese/Mandarin.jpg',
+			organization: 'Shanghai Jiao Tong University',
+			date: 'Completed April 2020',
+			categories: [
+				'Mandarin Chinese 1: Chinese for Beginners',
+				'Mandarin Chinese 2: Chinese for Beginners',
+				'Mandarin Chinese 3: Chinese for Beginners',
+				'Learn Mandarin Chinese: Capstone Project'
+			]
+		},
+		{
+			name: 'Mandarin Chinese 1: Chinese for Beginners',
+			icon: '/svg/chUni.png',
+			image: '/certificate/chinese/1.jpg',
+			organization: 'Shanghai Jiao Tong University',
+			date: 'Completed July 2020',
+			categories: ['Communication', 'Culture']
+		}
+		,
+		{
+			name: 'Mandarin Chinese 2: Chinese for Beginners',
+			icon: '/svg/chUni.png',
+			image: '/certificate/chinese/2.jpg',
+			organization: 'Shanghai Jiao Tong University',
+			date: 'Completed July 2020',
+			categories: ['Communication', 'Culture']
+		}
+		,
+		{
+			name: 'Mandarin Chinese 3: Chinese for Beginners',
+			icon: '/svg/chUni.png',
+			image: '/certificate/chinese/3.jpg',
+			organization: 'Shanghai Jiao Tong University',
+			date: 'Completed July 2020',
+			categories: ['Communication', 'Culture']
+		},
+		{
+			name: 'Learn Mandarin Chinese: Capstone Project',
+			icon: '/svg/chUni.png',
+			image: '/certificate/chinese/4.jpg',
+			organization: 'Shanghai Jiao Tong University',
+			date: 'Completed July 2020',
+			categories: ['Communication', 'Culture']
+		},
+		{
+			name: 'Spanish Vocabulary: Meeting People',
+			icon: '/svg/UC2.png',
+			image: '/certificate/Spanish.jpg',
+			organization: 'Shanghai Jiao Tong University',
+			date: 'Completed July 2020',
+			categories: ['Communication', 'Culture']
+		}
+	];
 
-            <div id="dialogflow" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Building Conversational Experiences with Dialogflow</h1>
-                <p class="mb-2"><strong>Issued by:</strong> Google Cloud Training Online</p>
-                <p class="mb-2"><strong>Date:</strong> Jul 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> MKFNGC75Y848</p>
-                <a href="#" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+	let selectedCertification: Certification | null = null;
 
-            <div id="iiot" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Industrial IoT on Google Cloud Platform</h1>
-                <p class="mb-2"><strong>Issued by:</strong> Google Cloud Training Online</p>
-                <p class="mb-2"><strong>Date:</strong> Jul 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> YENYCJQUJ6BJ</p>
-                <a href="#" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+	onMount(() => {
+		if (certifications.length > 0) {
+			selectedCertification = certifications[0];
+		}
+	});
 
-            <div id="mandarin" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Learn Mandarin Chinese Specialization</h1>
-                <p class="mb-2"><strong>Issued by:</strong> Shanghai Jiao Tong University</p>
-                <p class="mb-2"><strong>Date:</strong> Jul 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> BH7BRWCB53LJ</p>
-                <a href="#" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+	function displayCertificate(index: number) {
+		selectedCertification = certifications[index];
+	}
 
-            <div id="datascience" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Fundamentals of Scalable Data Science</h1>
-                <p class="mb-2"><strong>Issued by:</strong> IBM</p>
-                <p class="mb-2"><strong>Date:</strong> Jun 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> GUG7XDFZMUL9</p>
-                <a href="#" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+	let isSidebarOpen = true;
 
-            <div id="programming" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Programming Fundamentals</h1>
-                <p class="mb-2"><strong>Issued by:</strong> Coursera</p>
-                <p class="mb-2"><strong>Date:</strong> Jun 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> SDSEN4TS8WFS</p>
-                <a href="https://www.coursera.org/account/accomplishments/verify/SDSEN4TS8WFS" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+	function toggleSidebar() {
+		isSidebarOpen = !isSidebarOpen;
+	}
+</script>
 
-            <div id="spanish" class="certification-detail hidden">
-                <h1 class="text-2xl font-bold mb-4">Spanish Vocabulary: Meeting People</h1>
-                <p class="mb-2"><strong>Issued by:</strong> University of California, Davis</p>
-                <p class="mb-2"><strong>Date:</strong> Jun 2020</p>
-                <p class="mb-2"><strong>Credential ID:</strong> T6EHBPYN5ZGA</p>
-                <a href="#" 
-                   target="_blank" 
-                   class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Show Credential
-                </a>
-            </div>
+<button
+	on:click={toggleSidebar}
+	aria-controls="default-sidebar"
+	type="button"
+	class="ms-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+>
+	<span class="sr-only">Open sidebar</span>
+	<svg
+		class="h-6 w-6"
+		aria-hidden="true"
+		fill="currentColor"
+		viewBox="0 0 20 20"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			clip-rule="evenodd"
+			fill-rule="evenodd"
+			d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+		></path>
+	</svg>
+	Certfications
+</button>
 
-            <script>
-                // JavaScript to handle sidebar navigation
-                document.querySelectorAll('[data-cert]').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        // Hide all certification details
-                        document.querySelectorAll('.certification-detail').forEach(detail => {
-                            detail.classList.add('hidden');
-                        });
-                        // Show selected certification detail
-                        const certId = link.getAttribute('data-cert');
-                        document.getElementById(certId).classList.remove('hidden');
-                    });
-                });
+<!-- Sidebar -->
+<aside
+	id="default-sidebar"
+	class="fixed left-0 top-0 z-40 h-screen w-[350px] transform bg-blue-200 font-serif transition-transform"
+	style="transform: translateX({isSidebarOpen
+		? '0'
+		: '-100%'}); background-image: url('/assets/img12.jpg');"
+	aria-label="Sidebar"
+>
+	<div class="h-full overflow-y-auto px-3 py-4">
+		<h1 class="mb-4 flex justify-between text-4xl font-bold items-center">
+			Certifications
+			<button class="flex md:hidden" on:click={toggleSidebar}><img src="/svg/close.svg" alt="" class="w-5 h-5"/></button>
+		</h1>
+		<ul class="space-y-2 font-medium">
+			{#each certifications as cert, index}
+				<li>
+					<a
+						href=""
+						class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+						aria-selected={selectedCertification === cert}
+						on:click={() => displayCertificate(index)}
+					>
+						<img src={cert.icon} alt={cert.name} class="h-8 w-8" />
+						<span class="ms-3 text-left">{cert.name}</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+</aside>
 
-                // Show first certification by default
-                document.getElementById('python').classList.remove('hidden');
-            </script>
-        </main>
-    </div>
-</body>
+<div
+	class="h-screen bg-cover bg-center p-4 sm:ml-[350px]"
+	style="background-image: url('/assets/img1.jpg');"
+>
+	{#if selectedCertification}
+		<div class="flex flex-col items-start space-y-2">
+			<h2 class="text-3xl font-bold text-gray-800">{selectedCertification.name}</h2>
+			<p class="text-xl font-bold md:text-gray-100">{selectedCertification.organization}</p>
+			<p class="text-sm font-semibold italic text-gray-100">{selectedCertification.date}</p>
+			<ul class="mt-2 flex flex-wrap gap-2">
+				{#each selectedCertification.categories as category}
+					<li class="rounded-full bg-blue-500 px-3 py-1 text-sm font-bold text-gray-100">
+						{category}
+					</li>
+				{/each}
+			</ul>
+			<img
+				src={selectedCertification.image}
+				alt={selectedCertification.name}
+				class="md:w-7/12 rounded-lg shadow-md"
+			/>
+		</div>
+	{/if}
+</div>
+
+<style>
+	/* Custom animations */
+	@keyframes slideIn {
+		from {
+			transform: translateX(-100%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+	aside {
+		animation: slideIn 0.3s ease-out;
+	}
+</style>
