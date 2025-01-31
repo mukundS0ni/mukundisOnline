@@ -1,3 +1,13 @@
+# Portfolio Preview:
+<img width="800" alt="Screenshot 2025-01-31 at 8 28 25 PM" src="https://github.com/user-attachments/assets/908327b7-2d08-49cd-a00e-ebf6803e2b70" />
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/b2ec1424-b069-49be-b682-899e9d5e199c" />
+
+
+Project under development.
+
+Just realized svelte is not that fast, moving project to next.js
+
 # sv
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
