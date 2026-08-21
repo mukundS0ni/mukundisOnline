@@ -16,5 +16,15 @@
 		"incremental": true
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules",
+		"vite.config.ts",
+		"vite.config.js",
+		"svelte.config.js",
+		"svelte.config.cjs",
+		".svelte-kit",
+		"src/**/*.svelte",
+		"src/routes/**",
+		"static/**"
+	]
 }
