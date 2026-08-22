@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Terminal, Download, Menu, X, Code2, Sparkles, FileText } from 'lucide-react';
+import { Terminal, FileText, Menu, X } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 interface HeaderProps {
   onOpenTerminal: () => void;
@@ -13,37 +14,37 @@ export const Header: React.FC<HeaderProps> = ({ onOpenTerminal, onOpenResume }) 
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Manifesto', href: '#manifesto' },
     { label: 'Skills', href: '#skills' },
     { label: 'Certifications', href: '#certifications' },
     { label: 'Contact', href: '#contact' },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-nav transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo */}
+    <header className="sticky top-0 z-40 w-full bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#27272a]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* Brand Monogram & Title */}
         <a href="#" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:border-emerald-400 transition-all shadow-md shadow-emerald-500/10">
-            <Code2 className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-          </div>
+          <BrandLogo size={34} />
           <div>
-            <span className="font-heading font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5">
-              Mukund Soni
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            </span>
-            <span className="block text-[11px] font-code text-slate-400 group-hover:text-emerald-400 transition-colors">
-              Head of Tech • Full-Stack AI
+            <div className="flex items-center gap-2">
+              <span className="font-heading font-black text-base tracking-tight text-white group-hover:text-blue-400 transition-colors">
+                MUKUND SONI
+              </span>
+            </div>
+            <span className="block text-[10px] font-code text-zinc-400 uppercase tracking-wider">
+              Head of Technology • AI & Web3
             </span>
           </div>
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-emerald-400 hover:after:w-full after:transition-all"
+              className="text-xs font-code font-semibold text-zinc-400 hover:text-white transition-colors uppercase tracking-wider py-1 relative hover:after:w-full after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-500 after:transition-all"
             >
               {link.label}
             </a>
@@ -54,20 +55,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenTerminal, onOpenResume }) 
         <div className="hidden sm:flex items-center gap-3">
           <button
             onClick={onOpenTerminal}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 hover:border-emerald-500/50 text-slate-300 hover:text-emerald-300 text-xs font-code transition-all hover:shadow-lg hover:shadow-emerald-500/10"
-            title="Launch Developer Interactive CLI"
+            className="flex items-center gap-2 px-3 py-1.5 rounded bg-[#18181b] border border-[#3f3f46] hover:border-blue-500 text-zinc-300 hover:text-white text-xs font-code transition-all"
+            title="Launch Interactive Developer CLI Terminal"
           >
-            <Terminal className="w-4 h-4 text-emerald-400" />
-            <span>CLI Terminal</span>
-            <span className="px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-400">Ctrl+K</span>
+            <Terminal className="w-3.5 h-3.5 text-blue-500" />
+            <span>Terminal CLI</span>
           </button>
 
           <button
             onClick={onOpenResume}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02]"
+            className="flex items-center gap-2 px-4 py-1.5 rounded bg-white hover:bg-zinc-200 text-black font-bold text-xs transition-all shadow-sm"
           >
-            <FileText className="w-4 h-4" />
-            <span>Resume / CV</span>
+            <FileText className="w-3.5 h-3.5" />
+            <span>Resume</span>
           </button>
         </div>
 
@@ -75,45 +75,45 @@ export const Header: React.FC<HeaderProps> = ({ onOpenTerminal, onOpenResume }) 
         <div className="flex items-center gap-2 lg:hidden">
           <button
             onClick={onOpenTerminal}
-            className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400"
+            className="p-1.5 rounded bg-[#18181b] border border-[#3f3f46] text-blue-500"
           >
-            <Terminal className="w-5 h-5" />
+            <Terminal className="w-4 h-4" />
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300"
+            className="p-1.5 rounded bg-[#18181b] border border-[#3f3f46] text-zinc-300"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden glass-panel border-b border-slate-800 px-6 py-6 space-y-4">
-          <div className="flex flex-col space-y-3">
+        <div className="lg:hidden bg-[#121212] border-b border-[#27272a] px-6 py-4 space-y-3">
+          <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-200 hover:text-emerald-400 py-1 transition-colors"
+                className="text-xs font-code text-zinc-300 hover:text-white py-1 transition-colors uppercase tracking-wider"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
+          <div className="pt-3 border-t border-[#27272a] flex flex-col gap-2">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenResume();
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold text-sm shadow-md"
+              className="w-full flex items-center justify-center gap-2 py-2 rounded bg-white text-black font-bold text-xs"
             >
-              <Download className="w-4 h-4" />
-              View & Download Resume
+              <FileText className="w-3.5 h-3.5" />
+              Download Resume PDF
             </button>
           </div>
         </div>

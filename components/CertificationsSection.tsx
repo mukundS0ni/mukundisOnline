@@ -1,218 +1,496 @@
 import React, { useState } from 'react';
-import { Award, BookOpen, ExternalLink, ShieldCheck, Eye, X, GraduationCap, FileCheck } from 'lucide-react';
+import { Award, BookOpen, ShieldCheck, Eye, X, GraduationCap, FileText, ExternalLink, Trophy, Sparkles } from 'lucide-react';
 
 interface CertItem {
+  id: string;
   title: string;
   issuer: string;
-  image: string;
-  tag: string;
+  file: string;
+  category: 'Letters & Experience' | 'Google & Contests' | 'AI, Data & Cloud' | 'Software & Mobile' | 'Global Languages';
+  priority: number;
+  highlight?: string;
 }
 
 export const CertificationsSection: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedCert, setSelectedCert] = useState<CertItem | null>(null);
 
+  const bookImage = "/assets/Book Named My First Mobile App for Students: A comprehensive guide to Android app development for beginners (English Edition).png";
+
   const certificates: CertItem[] = [
+    // 1. Letters & Enterprise Experience (Priority 1)
     {
-      title: 'Python for Data Science & AI',
-      issuer: 'IBM',
-      image: '/certificate/IBM.jpg',
-      tag: 'Data Science & AI'
+      id: 'nonceblox-lor',
+      title: 'Letter of Recommendation (Web3 & Software Analyst)',
+      issuer: 'Nonceblox',
+      file: '/certificate/Nonceblox LOR.jpg',
+      category: 'Letters & Experience',
+      priority: 1,
+      highlight: 'Official Executive Recommendation'
     },
     {
-      title: 'Java Programming & Software Engineering Fundamentals',
-      issuer: 'Duke University',
-      image: '/certificate/Duke.jpg',
-      tag: 'Software Engineering'
+      id: 'birlasoft-cert',
+      title: 'Enterprise Cloud & Security Internship Certificate',
+      issuer: 'BirlaSoft',
+      file: '/certificate/Birlasoft Certificate.jpg',
+      category: 'Letters & Experience',
+      priority: 1,
+      highlight: 'Azure Cloud & Hybrid Security'
     },
     {
-      title: 'Android Application Development',
-      issuer: 'Android Certified',
-      image: '/certificate/android.jpg',
-      tag: 'Mobile Development'
-    },
-    {
-      title: 'Cybersecurity & Vulnerability Assessment',
+      id: 'internship-studio-cert',
+      title: 'Cybersecurity & Mitigation Internship Certificate',
       issuer: 'Internship Studio',
-      image: '/certificate/Internship1.jpg',
-      tag: 'Security & Mitigation'
+      file: '/certificate/Internship Studio Internship.jpg',
+      category: 'Letters & Experience',
+      priority: 1,
+      highlight: 'Ethical Hacking & System Hardening'
+    },
+
+    // 2. Google & Global Contests (Priority 2)
+    {
+      id: 'ird-contest-winner',
+      title: 'Innovation, Research and Development (IRD) Contest Winner',
+      issuer: 'IRD Cell',
+      file: '/certificate/Innovation, Research and Development (IRD).jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'Contest Winner — IRD Cell'
     },
     {
-      title: 'Conversational AI & Dialogflow',
+      id: 'google-kickstart-2022',
+      title: 'Google KickStart 2022 Global Algorithmic Contest',
+      issuer: 'Google',
+      file: '/certificate/Google KickStart 2022.jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'Global Algorithmic Competition'
+    },
+    {
+      id: 'google-kickstart-2021',
+      title: 'Google KickStart 2021 Global Algorithmic Contest',
+      issuer: 'Google',
+      file: '/certificate/Google KickStart 2021.jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'Global Algorithmic Competition'
+    },
+    {
+      id: 'google-hashcode-2022',
+      title: 'Google HashCode 2022 Team Programming Competition',
+      issuer: 'Google',
+      file: '/certificate/Google HashCode 2022.jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'Team Engineering Challenge'
+    },
+    {
+      id: 'google-hashcode-2021',
+      title: 'Google HashCode 2021 Team Programming Competition',
+      issuer: 'Google',
+      file: '/certificate/Google HashCode 2021.jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'Team Engineering Challenge'
+    },
+    {
+      id: 'national-eng-olympiad',
+      title: 'National Engineering Olympiad Certificate',
+      issuer: 'NEO',
+      file: '/certificate/National Engineering Olyampiad.jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'National Merit Rank'
+    },
+    {
+      id: 'raise-2020',
+      title: 'RAISE 2020 Global AI Summit Certificate',
+      issuer: 'Government of India / MeitY',
+      file: '/certificate/Raise 2020 Certificate.jpg',
+      category: 'Google & Contests',
+      priority: 2,
+      highlight: 'Global Responsible AI Summit'
+    },
+
+    // 3. AI, Data Science & Cloud Specializations (Priority 3)
+    {
+      id: 'ibm-data-science',
+      title: 'Fundamentals of Scalable Data Science',
+      issuer: 'IBM',
+      file: '/certificate/IBM Fundamentals of Scalable Data Science.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'Big Data & Scalable AI'
+    },
+    {
+      id: 'python-data-science',
+      title: 'Python for Data Science & AI',
+      issuer: 'IBM / Coursera',
+      file: '/certificate/Python Data Science.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'Data Science & Machine Learning'
+    },
+    {
+      id: 'python-specialization',
+      title: 'Python for Everybody Specialization',
+      issuer: 'University of Michigan',
+      file: '/certificate/Python for Everybody Specialization.png',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: '5-Course Full Python Mastery'
+    },
+    {
+      id: 'google-iot',
+      title: 'Industrial IoT on Google Cloud Platform',
       issuer: 'Google Cloud',
-      image: '/certificate/Dialogflow.jpg',
-      tag: 'Natural Language AI'
+      file: '/certificate/Google Industrial IoT on Google Cloud Platform.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'IoT Telemetry & Cloud Compute'
     },
     {
-      title: 'Internet of Things (IoT) & Smart Systems',
-      issuer: 'IoT Specialist',
-      image: '/certificate/IOT.jpg',
-      tag: 'IoT Telemetry'
+      id: 'google-dialogflow',
+      title: 'Building Conversational Experiences with Dialogflow',
+      issuer: 'Google Cloud',
+      file: '/certificate/Google Building Conversational Experiences with Dialogflow.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'Conversational NLP & AI Agents'
+    },
+    {
+      id: 'capstone-python-data',
+      title: 'Capstone: Retrieving, Processing & Visualizing Data',
+      issuer: 'University of Michigan',
+      file: '/certificate/Capstone Retriving: Processing, and Visualizing Data with Python.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'Data Processing Pipelines'
+    },
+    {
+      id: 'python-databases',
+      title: 'Using Databases with Python & SQL',
+      issuer: 'University of Michigan',
+      file: '/certificate/Using Databases with Python.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'Relational Database Architecture'
+    },
+    {
+      id: 'python-web-data',
+      title: 'Using Python to Access Web Data & APIs',
+      issuer: 'University of Michigan',
+      file: '/certificate/Using Python to Access Web Data.jpg',
+      category: 'AI, Data & Cloud',
+      priority: 3,
+      highlight: 'API Integration & Web Scraping'
+    },
+
+    // 4. Software & Mobile Development (Priority 4)
+    {
+      id: 'book-review-cert',
+      title: 'Technical Reviewer — "My First Mobile App for Students"',
+      issuer: 'Zaid Kamil (Published Author)',
+      file: bookImage,
+      category: 'Software & Mobile',
+      priority: 4,
+      highlight: 'Published Book Reviewer'
+    },
+    {
+      id: 'android-centrale',
+      title: 'Building Your First Android App',
+      issuer: 'CentraleSupélec (France)',
+      file: '/certificate/CentraleSupelec Building Your First Android App.jpg',
+      category: 'Software & Mobile',
+      priority: 4,
+      highlight: 'Native Mobile Development'
+    },
+    {
+      id: 'programming-fundamentals',
+      title: 'Programming Fundamentals & Java Architecture',
+      issuer: 'Duke University',
+      file: '/certificate/Programming Fundamentals.jpg',
+      category: 'Software & Mobile',
+      priority: 4,
+      highlight: 'Object-Oriented Design'
+    },
+    {
+      id: 'programming-for-everybody',
+      title: 'Programming for Everybody (Getting Started with Python)',
+      issuer: 'University of Michigan',
+      file: '/certificate/Programming for Everybody.jpg',
+      category: 'Software & Mobile',
+      priority: 4
+    },
+    {
+      id: 'internship-studio-training',
+      title: 'Cybersecurity & Ethical Hacking Systems Training',
+      issuer: 'Internship Studio',
+      file: '/certificate/Internship Studio Training.jpg',
+      category: 'Software & Mobile',
+      priority: 4
+    },
+
+    // 5. Global Languages & International Competencies (Priority 5)
+    {
+      id: 'mandarin-specialization',
+      title: 'Mandarin Chinese Specialization',
+      issuer: 'Peking University',
+      file: '/certificate/Mandarin Chinese Specialization.jpg',
+      category: 'Global Languages',
+      priority: 5,
+      highlight: 'Full Mandarin Specialization'
+    },
+    {
+      id: 'mandarin-1',
+      title: 'Mandarin Chinese Level 1',
+      issuer: 'Peking University',
+      file: '/certificate/Mandarin Chinese 1.jpg',
+      category: 'Global Languages',
+      priority: 5
+    },
+    {
+      id: 'mandarin-2',
+      title: 'Mandarin Chinese Level 2',
+      issuer: 'Peking University',
+      file: '/certificate/Mandarin Chinese 3.jpg',
+      category: 'Global Languages',
+      priority: 5
+    },
+    {
+      id: 'mandarin-4',
+      title: 'Mandarin Chinese Level 4',
+      issuer: 'Peking University',
+      file: '/certificate/Mandarin Chinese 4.jpg',
+      category: 'Global Languages',
+      priority: 5
+    },
+    {
+      id: 'spanish-vocabulary',
+      title: 'Spanish Vocabulary & Professional Communication',
+      issuer: 'UC Davis',
+      file: '/certificate/UCDAVIS Spanish Vocabulary: Meeting People.jpg',
+      category: 'Global Languages',
+      priority: 5
     }
   ];
 
+  const categories = [
+    'All',
+    'Letters & Experience',
+    'Google & Contests',
+    'AI, Data & Cloud',
+    'Software & Mobile',
+    'Global Languages'
+  ];
+
+  const filteredCertificates = activeCategory === 'All'
+    ? certificates
+    : certificates.filter((c) => c.category === activeCategory);
+
   return (
-    <section id="certifications" className="py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="certifications" className="py-16 border-b border-[#27272a]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-code">
+        <div className="text-left max-w-3xl space-y-3 mb-10">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#18181b] border border-[#27272a] text-blue-400 text-xs font-code">
             <Award className="w-3.5 h-3.5" />
-            <span>Honors & Accreditations</span>
+            <span>CREDENTIALS & VERIFIED ACCREDITATIONS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-heading">
-            Certifications & <span className="text-gradient-purple">Achievements</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white uppercase font-heading tracking-tight">
+            CERTIFICATIONS, LORS & COMPETITIONS ({certificates.length})
           </h2>
-          <p className="text-slate-400 text-base">
-            Formal achievements, GATE qualification, published technical review, and professional certifications.
+          <p className="text-zinc-400 text-sm">
+            Official letters of recommendation, Google global contests, contest victories, enterprise certificates, and technical book reviews.
           </p>
         </div>
 
-        {/* Major Achievements Highlight Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+        {/* Top 4 Key Honors Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {/* GATE Exam */}
-          <div className="glass-card p-6 rounded-2xl border border-emerald-500/30 space-y-3 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-[10px] font-code text-emerald-400 uppercase tracking-wider block font-bold">National Exam</span>
-                <h3 className="font-heading font-extrabold text-lg text-white">GATE Exam Qualified</h3>
-              </div>
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-l-4 border-l-red-500 space-y-2">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-red-500" />
+              <h3 className="font-heading font-bold text-sm text-white">GATE Exam Qualified (2x)</h3>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Qualified the competitive <strong>GATE (Graduate Aptitude Test in Engineering)</strong> exam in both pre-final and final years of B.Tech degree.
+            <p className="text-[11px] text-zinc-300 leading-relaxed">
+              Qualified the competitive GATE exam twice in pre-final and final years of B.Tech.
             </p>
-            <div className="pt-2">
-              <span className="text-[11px] font-code text-emerald-300 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/30">
-                Pre-Final & Final Year Qualifier
-              </span>
+            <span className="inline-block text-[9px] font-code text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-800">
+              National Engineering Qualifier
+            </span>
+          </div>
+
+          {/* IRD Contest Winner */}
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-l-4 border-l-green-500 space-y-2 cursor-pointer hover:border-[#52525b]" onClick={() => setSelectedCert(certificates.find(c => c.id === 'ird-contest-winner') || null)}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-green-500" />
+                <h3 className="font-heading font-bold text-sm text-white">IRD Contest Winner</h3>
+              </div>
+              <Eye className="w-3.5 h-3.5 text-zinc-400" />
             </div>
+            <p className="text-[11px] text-zinc-300 leading-relaxed">
+              Winner of the Innovation, Research and Development (IRD) contest issued by IRD Cell.
+            </p>
+            <span className="inline-block text-[9px] font-code text-green-400 bg-green-950 px-2 py-0.5 rounded border border-green-800">
+              Contest Winner — IRD Cell
+            </span>
+          </div>
+
+          {/* Nonceblox LOR */}
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-l-4 border-l-blue-500 space-y-2 cursor-pointer hover:border-[#52525b]" onClick={() => setSelectedCert(certificates[0])}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileText className="w-5 h-5 text-blue-500" />
+                <h3 className="font-heading font-bold text-sm text-white">Nonceblox LOR</h3>
+              </div>
+              <Eye className="w-3.5 h-3.5 text-zinc-400" />
+            </div>
+            <p className="text-[11px] text-zinc-300 leading-relaxed">
+              Official Executive Letter of Recommendation for Web3 & AI marketplace engineering.
+            </p>
+            <span className="inline-block text-[9px] font-code text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
+              Executive Recommendation
+            </span>
           </div>
 
           {/* Technical Book Reviewer */}
-          <div className="glass-card p-6 rounded-2xl border border-cyan-500/30 space-y-3 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
-                <BookOpen className="w-6 h-6" />
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-l-4 border-l-zinc-400 space-y-2 cursor-pointer hover:border-[#52525b]" onClick={() => setSelectedCert(certificates.find(c => c.id === 'book-review-cert') || null)}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-zinc-300" />
+                <h3 className="font-heading font-bold text-sm text-white">Book Reviewer</h3>
               </div>
-              <div>
-                <span className="text-[10px] font-code text-cyan-400 uppercase tracking-wider block font-bold">Published Literature</span>
-                <h3 className="font-heading font-extrabold text-lg text-white">Technical Book Reviewer</h3>
-              </div>
+              <Eye className="w-3.5 h-3.5 text-zinc-400" />
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Served as official Technical Reviewer for the book <strong>"My First Mobile App for Students"</strong> by Zaid Kamil, validating technical accuracy.
+            <p className="text-[11px] text-zinc-300 leading-relaxed">
+              Technical reviewer for <em>"My First Mobile App for Students"</em> by Zaid Kamil.
             </p>
-            <div className="pt-2">
-              <span className="text-[11px] font-code text-cyan-300 bg-cyan-500/10 px-2.5 py-1 rounded-lg border border-cyan-500/30">
-                Editorial & Code Verification
-              </span>
-            </div>
-          </div>
-
-          {/* Academic CGPA */}
-          <div className="glass-card p-6 rounded-2xl border border-purple-500/30 space-y-3 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-xl pointer-events-none" />
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/40">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-[10px] font-code text-purple-400 uppercase tracking-wider block font-bold">Academic Distinction</span>
-                <h3 className="font-heading font-extrabold text-lg text-white">B.Tech CS — 9.0 / 10.0</h3>
-              </div>
-            </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Graduated with First Class Distinction in Computer Science & Engineering from Jaypee University of Information Technology (2019–2023).
-            </p>
-            <div className="pt-2">
-              <span className="text-[11px] font-code text-purple-300 bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/30">
-                Jaypee University (2019–2023)
-              </span>
-            </div>
+            <span className="inline-block text-[9px] font-code text-zinc-300 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-700">
+              Published Book Reviewer
+            </span>
           </div>
         </div>
 
-        {/* Certificates Grid Gallery */}
-        <div className="space-y-6">
-          <h3 className="text-xl font-extrabold text-white font-heading text-center">
-            Professional Certificate Verification Gallery
-          </h3>
+        {/* Category Filters */}
+        <div className="flex flex-wrap items-center gap-2 mb-8">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3 py-1.5 rounded text-xs font-code font-bold uppercase transition-all ${
+                activeCategory === cat
+                  ? 'bg-white text-black'
+                  : 'bg-[#121212] text-zinc-400 border border-[#27272a] hover:border-[#3f3f46] hover:text-white'
+              }`}
+            >
+              {cat} {cat === 'All' ? `(${certificates.length})` : ''}
+            </button>
+          ))}
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certificates.map((cert, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedCert(cert)}
-                className="glass-card rounded-2xl border border-slate-800/80 p-4 space-y-3 cursor-pointer group hover:border-purple-500/50 transition-all"
-              >
-                <div className="h-44 rounded-xl overflow-hidden bg-slate-950 relative border border-slate-800">
+        {/* Certificates Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredCertificates.map((cert) => (
+            <div
+              key={cert.id}
+              onClick={() => setSelectedCert(cert)}
+              className="bg-[#121212] rounded border border-[#27272a] p-3.5 cursor-pointer group hover:border-[#52525b] transition-all space-y-3 flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                {/* Visual Thumbnail */}
+                <div className="h-44 rounded overflow-hidden bg-[#0a0a0a] relative border border-[#27272a] flex items-center justify-center">
                   <img
-                    src={cert.image}
+                    src={cert.file}
                     alt={cert.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-contain p-1 opacity-90 group-hover:opacity-100 transition-opacity"
                     onError={(e) => {
-                      // Fallback visual if image load fails
                       (e.target as HTMLElement).style.display = 'none';
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-code bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                      {cert.tag}
-                    </span>
-                    <span className="p-1 rounded bg-slate-900/80 text-white group-hover:text-emerald-400">
-                      <Eye className="w-4 h-4" />
+
+                  <div className="absolute top-2 right-2">
+                    <span className="p-1 rounded bg-black/90 text-zinc-300 group-hover:text-white border border-[#3f3f46] block">
+                      <Eye className="w-3.5 h-3.5" />
                     </span>
                   </div>
+
+                  {cert.highlight && (
+                    <div className="absolute bottom-2 left-2">
+                      <span className="px-2 py-0.5 rounded text-[9px] font-code bg-blue-950 text-blue-300 border border-blue-800">
+                        {cert.highlight}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
-                  <h4 className="font-heading font-bold text-sm text-white group-hover:text-purple-300 transition-colors">
+                  <h4 className="font-heading font-bold text-xs text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                     {cert.title}
                   </h4>
-                  <p className="text-xs font-code text-slate-400 mt-0.5">Issued by {cert.issuer}</p>
+                  <p className="text-[10px] font-code text-zinc-400 mt-0.5">Issuer: {cert.issuer}</p>
                 </div>
               </div>
-            ))}
-          </div>
+
+              <div className="pt-2 border-t border-[#27272a] flex items-center justify-between text-[10px] font-code text-zinc-400">
+                <span className="uppercase text-zinc-500">{cert.category}</span>
+                <span className="text-blue-400 group-hover:underline flex items-center gap-1 font-bold">
+                  <span>View Document</span> →
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Lightbox Image Modal */}
+      {/* Lightbox Modal */}
       {selectedCert && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
-          <div className="relative max-w-3xl w-full bg-[#090d16] border border-purple-500/40 rounded-2xl p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+          <div className="relative max-w-4xl w-full bg-[#121212] border border-[#3f3f46] rounded p-5 shadow-2xl space-y-4 max-h-[90vh] flex flex-col">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
               <div>
-                <h3 className="font-heading font-bold text-lg text-white">{selectedCert.title}</h3>
-                <p className="text-xs font-code text-purple-400">Issuer: {selectedCert.issuer}</p>
+                <span className="px-2 py-0.5 rounded text-[10px] font-code bg-blue-950 text-blue-300 border border-blue-800">
+                  {selectedCert.category}
+                </span>
+                <h3 className="font-heading font-bold text-base text-white mt-1">{selectedCert.title}</h3>
+                <p className="text-xs font-code text-zinc-400">Issuer: {selectedCert.issuer}</p>
               </div>
-              <button
-                onClick={() => setSelectedCert(null)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              <div className="flex items-center gap-2">
+                <a
+                  href={selectedCert.file}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-white text-black font-bold text-xs"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" /> Open Full Image
+                </a>
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="p-1.5 rounded text-zinc-400 hover:text-white hover:bg-[#18181b]"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            <div className="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center max-h-[70vh]">
+            {/* Document Viewer Body */}
+            <div className="flex-1 rounded border border-[#27272a] bg-black flex items-center justify-center overflow-hidden min-h-[400px]">
               <img
-                src={selectedCert.image}
+                src={selectedCert.file}
                 alt={selectedCert.title}
-                className="max-h-[65vh] w-auto object-contain rounded-lg"
+                className="max-h-[70vh] w-auto object-contain"
               />
             </div>
 
-            <div className="flex justify-end pt-2">
+            <div className="flex items-center justify-between text-xs font-code text-zinc-400 pt-2 border-t border-[#27272a]">
+              <span>File: {selectedCert.file.split('/').pop()}</span>
               <button
                 onClick={() => setSelectedCert(null)}
-                className="px-4 py-2 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 font-bold text-xs"
+                className="px-4 py-1.5 rounded bg-[#18181b] hover:bg-[#27272a] text-white font-bold text-xs border border-[#3f3f46]"
               >
-                Close Preview
+                Close Viewer
               </button>
             </div>
           </div>

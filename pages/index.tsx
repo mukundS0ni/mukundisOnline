@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { HeroSection } from '../components/HeroSection';
 import { ExperienceSection } from '../components/ExperienceSection';
 import { ProjectsSection } from '../components/ProjectsSection';
+import { ManifestoSection } from '../components/ManifestoSection';
 import { SkillsSection } from '../components/SkillsSection';
 import { CertificationsSection } from '../components/CertificationsSection';
 import { ContactSection } from '../components/ContactSection';
@@ -38,17 +39,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <div className="relative min-h-screen bg-[#090d16] text-slate-100 overflow-x-hidden selection:bg-emerald-500 selection:text-slate-950 font-inter">
-        {/* Dynamic HTML5 Canvas Particle Background */}
+      <div className="relative min-h-screen bg-[#0a0a0a] text-zinc-100 overflow-x-hidden selection:bg-blue-600 selection:text-white font-sans">
+        {/* Technical Grid Background */}
         <ParticleBackground />
 
-        {/* Top Header */}
+        {/* Top Custom Header */}
         <Header
           onOpenTerminal={() => setTerminalOpen(true)}
           onOpenResume={() => setResumeOpen(true)}
         />
 
-        {/* Main Body Content Sections */}
+        {/* Main Content Sections */}
         <main className="relative z-10">
           <HeroSection
             onOpenTerminal={() => setTerminalOpen(true)}
@@ -59,6 +60,8 @@ export default function Home() {
 
           <ProjectsSection />
 
+          <ManifestoSection />
+
           <SkillsSection />
 
           <CertificationsSection />
@@ -68,17 +71,17 @@ export default function Home() {
           />
         </main>
 
-        {/* Global Footer */}
+        {/* Custom 4-Column Footer */}
         <Footer />
 
-        {/* Interactive CLI Terminal Drawer */}
+        {/* CLI Terminal Drawer */}
         <InteractiveTerminal
           isOpen={terminalOpen}
           onClose={() => setTerminalOpen(false)}
           onOpenResume={() => setResumeOpen(true)}
         />
 
-        {/* Resume Modal & Viewer */}
+        {/* Resume Modal */}
         <ResumeModal
           isOpen={resumeOpen}
           onClose={() => setResumeOpen(false)}

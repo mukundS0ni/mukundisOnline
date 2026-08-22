@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Briefcase, Calendar, MapPin, ExternalLink, ChevronRight, Cpu, Globe, Award, Sparkles, Shield, Code } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, ChevronRight, Globe, Cpu, Award } from 'lucide-react';
 
 interface ExperienceItem {
   id: string;
@@ -9,8 +9,9 @@ interface ExperienceItem {
   period: string;
   location: string;
   type: string;
-  color: string;
+  accentColor: string;
   badge: string;
+  badgeColor: string;
   summary: string;
   bullets: string[];
   skills: string[];
@@ -28,11 +29,12 @@ export const ExperienceSection: React.FC = () => {
       period: 'Feb 2025 – May 2026',
       location: 'Remote / Hybrid',
       type: 'Co-Founder (Feb 25–Mar 26) • Contract Consultant (Mar 26–May 26)',
-      color: 'from-emerald-500 to-teal-400',
-      badge: 'AI & Industrial Automation',
+      accentColor: 'border-l-red-500',
+      badge: 'AI KIOSK PLATFORM',
+      badgeColor: 'bg-red-950 text-red-400 border-red-800',
       summary: 'Spearheaded engineering for intelligent display kiosk automation and real-time telemetry systems for smart infrastructure.',
       bullets: [
-        'Developed Optcl.io, an AI-powered platform for intelligent display kiosk management, focusing on automated content delivery and live device telemetry analytics.',
+        'Developed Optcl.io, an AI-powered platform for intelligent display kiosk management, focusing on automated content delivery and live telemetry analytics.',
         'Architected end-to-end AI systems for industrial automation and smart infrastructure applications.',
         'Managed cloud infrastructure, hardware IoT sync pipelines, and system reliability, scaling real-time analytics delivery.',
         'Transitioned to Contract Lead Architect in March 2026 to oversee strategic system deployment.'
@@ -47,8 +49,9 @@ export const ExperienceSection: React.FC = () => {
       period: 'Jun 2024 – Dec 2024',
       location: 'Remote (European Startup / IST & CET)',
       type: 'Full-time Remote',
-      color: 'from-cyan-500 to-blue-500',
-      badge: 'Asynchronous European Startup',
+      accentColor: 'border-l-blue-500',
+      badge: 'DEFI & STAKING',
+      badgeColor: 'bg-blue-950 text-blue-400 border-blue-800',
       summary: 'Engineered Web3 prediction markets and staker incentive dashboards for decentralized DeFi data networks.',
       bullets: [
         'Created the official token launch website for OCP token and engineered community reward incentive mechanisms for staking POP tokens.',
@@ -66,8 +69,9 @@ export const ExperienceSection: React.FC = () => {
       period: 'Sep 2023 – Mar 2024',
       location: 'Remote',
       type: 'Contract',
-      color: 'from-purple-500 to-indigo-500',
-      badge: 'Mobile & Enterprise',
+      accentColor: 'border-l-green-500',
+      badge: 'MOBILE & ENTERPRISE',
+      badgeColor: 'bg-green-950 text-green-400 border-green-800',
       summary: 'Designed and deployed bespoke mobile applications and enterprise systems for external client projects.',
       bullets: [
         'Designed and built custom cross-platform applications tailored to precise client business requirements.',
@@ -84,8 +88,9 @@ export const ExperienceSection: React.FC = () => {
       period: 'Jun 2023 – Aug 2023',
       location: 'Hybrid',
       type: 'Full-time',
-      color: 'from-amber-500 to-orange-500',
-      badge: 'NFT & AI Integration',
+      accentColor: 'border-l-zinc-400',
+      badge: 'WEB3 & AI CMS',
+      badgeColor: 'bg-zinc-900 text-zinc-300 border-zinc-700',
       summary: 'Built Web3 marketplace solutions and integrated AI-driven generative NFT creation pipelines.',
       bullets: [
         'Created custom Web3 solutions for NFT marketplaces and Web3 gaming portals.',
@@ -102,8 +107,9 @@ export const ExperienceSection: React.FC = () => {
       period: 'Jun 2022 – Jul 2022',
       location: 'Noida, India',
       type: 'Internship',
-      color: 'from-slate-400 to-slate-600',
-      badge: 'Azure Cloud Security',
+      accentColor: 'border-l-zinc-600',
+      badge: 'AZURE SECURITY',
+      badgeColor: 'bg-zinc-900 text-zinc-400 border-zinc-800',
       summary: 'Contributed to cloud management, hybrid device protection, and vulnerability detection systems.',
       bullets: [
         'Contributed to enterprise Microsoft Azure infrastructure projects and hybrid endpoint security.',
@@ -114,13 +120,14 @@ export const ExperienceSection: React.FC = () => {
     {
       id: 'internship-studio',
       role: 'Cybersecurity Intern',
-      tailoredTitle: 'Cybersecurity & Mitigation Specialist',
+      tailoredTitle: 'Cybersecurity Specialist',
       company: 'Internship Studio',
       period: 'Aug 2021 – Sep 2021',
       location: 'Remote',
       type: 'Internship',
-      color: 'from-slate-500 to-slate-700',
-      badge: 'Ethical Hacking',
+      accentColor: 'border-l-zinc-700',
+      badge: 'ETHICAL HACKING',
+      badgeColor: 'bg-zinc-900 text-zinc-400 border-zinc-800',
       summary: 'Performed ethical hacking vulnerability scans and formulated mitigation strategies.',
       bullets: [
         'Identified system security vulnerabilities using ethical hacking penetration frameworks.',
@@ -133,84 +140,78 @@ export const ExperienceSection: React.FC = () => {
   const activeExp = experiences.find((exp) => exp.id === activeTab) || experiences[0];
 
   return (
-    <section id="experience" className="py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="experience" className="py-16 border-b border-[#27272a]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-code">
+        <div className="text-left max-w-3xl space-y-3 mb-12">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#18181b] border border-[#27272a] text-blue-400 text-xs font-code">
             <Briefcase className="w-3.5 h-3.5" />
-            <span>Track Record & Leadership</span>
+            <span>TRACK RECORD</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-heading">
-            Work Experience & <span className="text-gradient-emerald">Technical Impact</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white uppercase font-heading tracking-tight">
+            WORK EXPERIENCE & TECHNICAL IMPACT
           </h2>
-          <p className="text-slate-400 text-base">
-            Demonstrated engineering leadership across startup co-founding, distributed European DeFi protocols, AI kiosk systems, and full-stack architecture.
+          <p className="text-zinc-400 text-sm">
+            Engineering leadership across startup co-founding, distributed European DeFi protocols, AI kiosk systems, and full-stack engineering.
           </p>
         </div>
 
-        {/* Strategic Remote Capabilities Highlight Box */}
-        <div className="glass-card p-6 rounded-2xl border border-slate-800 mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-              <Globe className="w-6 h-6" />
+        {/* Remote Capability Highlights */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-t-2 border-t-blue-500">
+            <div className="flex items-center gap-2 text-white font-bold text-sm mb-1 font-heading">
+              <Globe className="w-4 h-4 text-blue-500" />
+              <span>Asynchronous & Remote Work</span>
             </div>
-            <div>
-              <h4 className="font-heading font-bold text-white text-sm">Asynchronous & Remote Native</h4>
-              <p className="text-slate-400 text-xs mt-1">Proven track record in European startup setups, writing detailed technical RFCs and maintaining high velocity across IST & CET time zones.</p>
-            </div>
+            <p className="text-zinc-400 text-xs leading-relaxed">European startup track record writing technical RFCs and maintaining high velocity across IST & CET time zones.</p>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-              <Cpu className="w-6 h-6" />
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-t-2 border-t-red-500">
+            <div className="flex items-center gap-2 text-white font-bold text-sm mb-1 font-heading">
+              <Cpu className="w-4 h-4 text-red-500" />
+              <span>End-to-End Ownership</span>
             </div>
-            <div>
-              <h4 className="font-heading font-bold text-white text-sm">End-to-End Ownership</h4>
-              <p className="text-slate-400 text-xs mt-1">From initial architectural design and cloud deployment to production telemetry and client management.</p>
-            </div>
+            <p className="text-zinc-400 text-xs leading-relaxed">From initial architecture and cloud deployment to production telemetry and client management.</p>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/30">
-              <Award className="w-6 h-6" />
+          <div className="bg-[#121212] p-4 rounded border border-[#27272a] border-t-2 border-t-green-500">
+            <div className="flex items-center gap-2 text-white font-bold text-sm mb-1 font-heading">
+              <Award className="w-4 h-4 text-green-500" />
+              <span>Leadership Scale</span>
             </div>
-            <div>
-              <h4 className="font-heading font-bold text-white text-sm">Leadership Scale</h4>
-              <p className="text-slate-400 text-xs mt-1">Co-founded & led technology at Optcl; engineered token incentive dashboards for Powerloom Protocol.</p>
-            </div>
+            <p className="text-zinc-400 text-xs leading-relaxed">Co-founded & led technology at Optcl; engineered token incentive dashboards for Powerloom Protocol.</p>
           </div>
         </div>
 
-        {/* Experience Selector Tabs + Detailed Display */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Experience Selector Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Company Selector Tab Column */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="lg:col-span-4 space-y-2">
             {experiences.map((exp) => {
               const isActive = exp.id === activeTab;
               return (
                 <button
                   key={exp.id}
                   onClick={() => setActiveTab(exp.id)}
-                  className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between group ${
+                  className={`w-full text-left p-3.5 rounded border transition-all flex items-center justify-between group ${
                     isActive
-                      ? 'glass-card border-emerald-500/50 bg-slate-900/90 shadow-lg shadow-emerald-500/10'
-                      : 'border-slate-800/80 bg-slate-950/40 hover:border-slate-700 hover:bg-slate-900/40'
+                      ? `bg-[#18181b] border-[#52525b] ${exp.accentColor} border-l-4`
+                      : 'bg-[#121212] border-[#27272a] hover:border-[#3f3f46]'
                   }`}
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className={`font-heading font-bold text-sm ${isActive ? 'text-emerald-400' : 'text-white group-hover:text-emerald-300'}`}>
+                      <span className={`font-heading font-bold text-sm ${isActive ? 'text-white' : 'text-zinc-300 group-hover:text-white'}`}>
                         {exp.company}
                       </span>
-                      <span className="text-[10px] font-code px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                      <span className={`text-[9px] font-code px-1.5 py-0.5 rounded border ${exp.badgeColor}`}>
                         {exp.badge}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400 font-medium">{exp.role}</p>
-                    <p className="text-[11px] font-code text-slate-500">{exp.period}</p>
+                    <p className="text-xs text-zinc-400">{exp.role}</p>
+                    <p className="text-[10px] font-code text-zinc-500">{exp.period}</p>
                   </div>
-                  <ChevronRight className={`w-5 h-5 transition-transform ${isActive ? 'text-emerald-400 translate-x-1' : 'text-slate-600 group-hover:text-slate-400'}`} />
+                  <ChevronRight className={`w-4 h-4 ${isActive ? 'text-white' : 'text-zinc-600'}`} />
                 </button>
               );
             })}
@@ -218,41 +219,37 @@ export const ExperienceSection: React.FC = () => {
 
           {/* Detailed Experience Display Panel */}
           <div className="lg:col-span-8">
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-slate-700/70 relative overflow-hidden space-y-6">
-              {/* Top Accent Glow Line */}
-              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${activeExp.color}`} />
-
-              {/* Title & Organization Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+            <div className={`bg-[#121212] p-6 rounded border border-[#27272a] ${activeExp.accentColor} border-l-4 space-y-5`}>
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#27272a] pb-4">
                 <div>
-                  <h3 className="text-2xl font-extrabold text-white font-heading">{activeExp.role}</h3>
-                  <p className="text-sm font-bold text-emerald-400 mt-1 font-heading">
-                    {activeExp.tailoredTitle} <span className="text-slate-400 font-normal">@ {activeExp.company}</span>
+                  <h3 className="text-xl font-black text-white font-heading">{activeExp.role}</h3>
+                  <p className="text-xs font-bold text-blue-400 font-code mt-0.5">
+                    {activeExp.tailoredTitle} <span className="text-zinc-400 font-normal">@ {activeExp.company}</span>
                   </p>
                 </div>
-                <div className="flex flex-col text-xs font-code text-slate-400 space-y-1 sm:text-right">
-                  <span className="flex items-center gap-1.5 sm:justify-end text-cyan-300">
-                    <Calendar className="w-3.5 h-3.5" /> {activeExp.period}
+                <div className="flex flex-col text-xs font-code text-zinc-400 space-y-0.5 sm:text-right">
+                  <span className="flex items-center gap-1 sm:justify-end text-zinc-300">
+                    <Calendar className="w-3.5 h-3.5 text-zinc-400" /> {activeExp.period}
                   </span>
-                  <span className="flex items-center gap-1.5 sm:justify-end text-slate-400">
-                    <MapPin className="w-3.5 h-3.5 text-slate-500" /> {activeExp.location}
+                  <span className="flex items-center gap-1 sm:justify-end text-zinc-400">
+                    <MapPin className="w-3.5 h-3.5 text-zinc-500" /> {activeExp.location}
                   </span>
-                  <span className="text-[11px] text-purple-300 font-medium">{activeExp.type}</span>
                 </div>
               </div>
 
               {/* Impact Summary */}
-              <p className="text-slate-300 text-sm leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+              <p className="text-zinc-300 text-xs leading-relaxed bg-[#0a0a0a] p-3 rounded border border-[#27272a]">
                 {activeExp.summary}
               </p>
 
               {/* Bullet Points */}
-              <div className="space-y-3">
-                <h4 className="text-xs font-code font-bold uppercase tracking-wider text-slate-400">Key Contributions & Technical Scale</h4>
-                <ul className="space-y-3">
+              <div className="space-y-2">
+                <h4 className="text-[11px] font-code font-bold uppercase text-zinc-400">Key Contributions</h4>
+                <ul className="space-y-2">
                   {activeExp.bullets.map((bullet, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
+                    <li key={idx} className="flex items-start gap-2.5 text-xs text-zinc-300">
+                      <span className="w-1.5 h-1.5 bg-blue-500 mt-1.5 shrink-0" />
                       <span className="leading-relaxed">{bullet}</span>
                     </li>
                   ))}
@@ -260,13 +257,13 @@ export const ExperienceSection: React.FC = () => {
               </div>
 
               {/* Skills Tags */}
-              <div className="pt-4 border-t border-slate-800 space-y-2">
-                <span className="text-xs font-code text-slate-400 block">Technologies & Methodologies:</span>
-                <div className="flex flex-wrap gap-2">
+              <div className="pt-3 border-t border-[#27272a] space-y-1.5">
+                <span className="text-[11px] font-code text-zinc-400 block">Technologies & Tools:</span>
+                <div className="flex flex-wrap gap-1.5">
                   {activeExp.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2.5 py-1 rounded-lg text-xs font-code bg-slate-900 text-emerald-300 border border-emerald-500/30"
+                      className="px-2 py-0.5 rounded text-[11px] font-code bg-[#18181b] text-zinc-300 border border-[#27272a]"
                     >
                       {skill}
                     </span>
